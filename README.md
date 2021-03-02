@@ -1,27 +1,42 @@
-# Appmaster
+Remover os bootstrap das aplicacoes de micro fromtends para ele nao inicializarem sozinhos
+// bootstrap: [AppComponent] Para ele nao dar boostrap sozinho ou seja inicializar
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
+o Angular cria o novo projeto dentro da pasta projects
+ng g app extrato
 
-## Development server
+Adicionado @angular/elements a todos os projetos
+ng add @angular/elements
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Instalando em um projeto 
+ng add @angular/elements projects pagamento
 
-## Code scaffolding
+Startando uma aplicacao de microservico app.module.ts
+    const elem = createCustomElement(AppComponent, { injector: this.injector });
+    customElements.define('micro-app-extrato', elem);
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+Colocar no projeto pai no app.module.ts
+schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+app.component.ts
+ngOnInit()
+inserir os scripts dos micro-frontends
 
-## Running unit tests
+Mudando o build padrao
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+npm i --save ngx-build-plus
 
-## Running end-to-end tests
+ng add ngx-build-plus
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+ng add ngx-build-plus --project extrato
 
-## Further help
+******
+Realizar o Deploy das Aplicacoes
+extrato
+pagamento
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+Para rodar os micro front end teste local
+npx live-server ./dist
+
+ng g ngx-build-plus:externals
